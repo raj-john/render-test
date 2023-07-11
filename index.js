@@ -4,6 +4,7 @@ const express 			= require('express')
 const cors  				= require('cors')
 const morgan 				= require('morgan')
 const authenticate 	= require('./authenticate')
+const sessionId  		= require('./session-key.js')
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -20,7 +21,9 @@ authenticate()
 
 // console.log('KEYs', encrypt())
 
-app.get('/', (req, res) => { res.json('Welcome') })
+app.get('/', (req, res) => { res.json('Welcome' + sessionId.get()) })
 app.use((req, res) => { res.status(404).json('Not Found') })
 
 app.listen(port, () => console.log('Server started at', port))
+
+// github acess token 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 
